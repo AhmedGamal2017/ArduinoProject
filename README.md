@@ -1,7 +1,9 @@
 # ArduinoProject
+
 this the graduation project for 'Mohammed Ehab'
 
 ## How to Run (Simple)
+
 - connect your arduino to the computer.
 - open `terminal` or `cmd`.
 - `Copy` and `Past` the following :
@@ -12,8 +14,11 @@ cd Project
 npm i
 npm run start
 ```
+
 ---
+
 ## How to Run (Detailed)
+
 ### Installation
 - open `terminal` or `cmd`.
 - clone the repository --> `git clone https://github.com/AhmedGamal2017/ArduinoProject.git`.
