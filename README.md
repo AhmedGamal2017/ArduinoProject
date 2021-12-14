@@ -2,8 +2,9 @@
 this the graduation project for 'Mohammed Ehab'
 
 ## Installation
+- open `terminal` or `cmd` and do the following
 - clone the repo --> `git clone https://github.com/AhmedGamal2017/ArduinoProject.git`
-- open terminal or cmd in the Project folder then run `cd Project`
+- open the Project folder --> `cd Project`
 - install dependancies --> `npm i`
 
 ## Run
