@@ -12,7 +12,9 @@ this the graduation project for 'Mohammed Ehab'
 - run the program --> `npm run start`
 
 ---
-## Or Just Copy and Past the following
+## Or just `Copy` and `Past` the following
+- open `terminal` or `cmd`
+- `Copy` and `Past` the following
 ```
 git clone https://github.com/AhmedGamal2017/ArduinoProject.git
 cd Project
