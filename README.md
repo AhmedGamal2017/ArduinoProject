@@ -1,6 +1,6 @@
 # ArduinoProject
 
-this the graduation project for 'Mohammed Ehab'
+this is the graduation project of my cousin 'Mohammed Ehab'
 
 ## How to Run (Simple)
 
