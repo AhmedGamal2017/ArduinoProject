@@ -7,9 +7,6 @@ var express = require('express'); // include the express library
 var app = express(); // create a server using express
 app.use(express.json());
 
-var io = require('socket.io');
-var socket = io.listen(app);
-
 // configure the app to use bodyParser()
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({
@@ -18,15 +15,6 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 let incomingSerialData = "22";
-var count = 0
-socket.on('connection', function(client) {
-    count++;
-    console.log("New clint : " + client);
-    client.broadcast({count:count})
-    client.on('disconnect', function(){
-        count--;
-    })
-});
 
 //#region Configuring and Connecting arduino serial Port
 
@@ -73,15 +61,24 @@ function sendToSerial(data) {
 
 // configure the server's behavior:
 app.use('/', express.static('public')); // serve static files from /public
-app.listen(8080); // start the server
+const server = app.listen(8080); // start the server
 
 console.log("^".repeat(50));
 console.log("Server Opened at port 'localhost:8080'");
 console.log("^".repeat(50) + "\n");
 
-let processCounter = 0;
+var count = 0
+server.on('connection', function(client) {
+    count++;
+    console.log("clint count = " + count);
+    client.on('disconnect', function(){
+        count--;
+        console.log("clint count = " + count);
+    })
+});
 
-app.post("/sendSerialData", async function (req, res) {
+let processCounter = 0;
+app.post("/SerialData", async function (req, res) {
 
   console.log("\nprocess No. : " + ++processCounter);
   console.log("=".repeat(50));
@@ -94,3 +91,7 @@ app.post("/sendSerialData", async function (req, res) {
   console.log("=".repeat(50));
   return res.json(req.body);
 });
+
+app.get("/SerialData", function (req, res) {
+  res.send({serialData: incomingSerialData});
+})

@@ -5,9 +5,10 @@ let redFlag = '2',
   blueFlag = '2';
 
 // check Auto by default
-redFlagInput[0].checked = true;
-blueFlagInput[0].checked = true;
-
+UpdateLocalData();
+setInterval(function() {
+  UpdateLocalData();
+}, 1000);
 function ChangeRedFlag() {
   console.log("Changing Red Flag");
   let SelectedRedFlagInput = document.querySelector('input[name="RedFlag"]:checked');
@@ -28,7 +29,7 @@ function SendData() {
   let serialInputData = redFlag + blueFlag;
   console.log(serialInputData);
 
-  let url = "/sendSerialData";
+  let url = "/SerialData";
 
   $.ajax({
     type: "POST",
@@ -44,4 +45,54 @@ function SendData() {
       console.log(err);
     }
   });
+}
+
+function UpdateLocalData() {
+  $.get("/serialData", function (data, status) {
+  let serialData = data.serialData;
+  redFlag = serialData[0];
+  blueFlag = serialData[1];
+
+  let redIndex, blueIndex;
+
+  switch (redFlag) {
+    case '0':
+      redIndex = 2;
+      break;
+    case '1':
+      redIndex = 1;
+      break;
+    default:
+    case '2':
+      redIndex = 0;
+      break;
+  }
+
+  switch (blueFlag) {
+    case '0':
+      blueIndex = 2;
+      break;
+    case '1':
+      blueIndex = 1;
+      break;
+    default:
+    case '2':
+      blueIndex = 0;
+      break;
+  }
+
+  let rInput = redFlagInput[redIndex];
+  rInput.checked = true;
+  redFlagInput.forEach(input => {
+    input.parentElement.classList.remove("active");
+  });
+  rInput.parentElement.classList.add("active");
+
+  let bInput = blueFlagInput[blueIndex];
+  bInput.checked = true;
+  blueFlagInput.forEach(input => {
+    input.parentElement.classList.remove("active")
+  });
+  bInput.parentElement.classList.add("active");
+});
 }

@@ -14,7 +14,6 @@
     "start": "node listPorts.js\n node index.js"
   },
   "description": "A simple serial-to-websocket server",
-  "main": "wsServer.js",
-  "devDependencies": {},
+  "main": "index.js",
   "license": "ISC"
 }
