@@ -6,13 +6,13 @@ this is the graduation project of my cousin 'Mohammed Ehab'
 
 - __git__ version controll system:
     - you can check your system by `git --version`
-    - if not found install from (here)[https://git-scm.com/downloads]
+    - if not found install from [here](https://git-scm.com/downloads)
 - __node.js__ :
     - you can check your system by `node -v`
-    - if not found install from (here)[https://nodejs.org/en/download/]
+    - if not found install from [here](https://nodejs.org/en/download/)
 - __Python__ :
     - you can chech your system by `python -V`
-    - if not found install from (here)[https://www.python.org/downloads/]
+    - if not found install from [here](https://www.python.org/downloads/)
 
 ## How to Run (Simple)
 
