@@ -4,8 +4,7 @@
   "author": "Ahmed Gamal",
   "dependencies": {
     "express": "*",
-    "serialport": "^9.2.0",
-    "ws": "^7.5.3"
+    "serialport": "^9.2.0"
   },
   "engines": {
     "node": "0.10.x",

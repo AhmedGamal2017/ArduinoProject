@@ -5,18 +5,28 @@ var portName = arduino.port;
 
 var express = require('express'); // include the express library
 var app = express(); // create a server using express
+app.use(express.json());
 
-var bodyParser = require('body-parser');
+var io = require('socket.io');
+var socket = io.listen(app);
 
 // configure the app to use bodyParser()
+var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
 
-app.use(express.json());
-
 let incomingSerialData = "22";
+var count = 0
+socket.on('connection', function(client) {
+    count++;
+    console.log("New clint : " + client);
+    client.broadcast({count:count})
+    client.on('disconnect', function(){
+        count--;
+    })
+});
 
 //#region Configuring and Connecting arduino serial Port
 
