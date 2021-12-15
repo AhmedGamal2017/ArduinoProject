@@ -71,6 +71,7 @@ var count = 0
 server.on('connection', function(client) {
     count++;
     console.log("clint count = " + count);
+    console.log(client.address());
     client.on('disconnect', function(){
         count--;
         console.log("clint count = " + count);

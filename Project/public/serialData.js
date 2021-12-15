@@ -9,6 +9,7 @@ UpdateLocalData();
 setInterval(function() {
   UpdateLocalData();
 }, 1000);
+
 function ChangeRedFlag() {
   console.log("Changing Red Flag");
   let SelectedRedFlagInput = document.querySelector('input[name="RedFlag"]:checked');
@@ -95,4 +96,8 @@ function UpdateLocalData() {
   });
   bInput.parentElement.classList.add("active");
 });
+}
+
+function getIP(json) {  
+  console.log("My public IP address is: ", json.ip);  
 }
