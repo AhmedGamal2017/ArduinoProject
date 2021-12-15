@@ -67,15 +67,20 @@ console.log("^".repeat(50));
 console.log("Server Opened at port 'localhost:8080'");
 console.log("^".repeat(50) + "\n");
 
+var opn = require('opn');
+
+// opens the url in the default browser 
+opn('http://localhost:8080');
+
 var count = 0
-server.on('connection', function(client) {
-    count++;
+server.on('connection', function (client) {
+  count++;
+  console.log("clint count = " + count);
+  console.log(client.address());
+  client.on('disconnect', function () {
+    count--;
     console.log("clint count = " + count);
-    console.log(client.address());
-    client.on('disconnect', function(){
-        count--;
-        console.log("clint count = " + count);
-    })
+  })
 });
 
 let processCounter = 0;
@@ -94,5 +99,36 @@ app.post("/SerialData", async function (req, res) {
 });
 
 app.get("/SerialData", function (req, res) {
-  res.send({serialData: incomingSerialData});
+  res.send({
+    serialData: incomingSerialData
+  });
+})
+
+'use strict';
+
+const {
+  networkInterfaces
+} = require('os');
+
+const nets = networkInterfaces();
+const results = Object.create(null); // Or just '{}', an empty object
+let nameOfNetwrok;
+
+for (const name of Object.keys(nets)) {
+  for (const net of nets[name]) {
+    // Skip over non-IPv4 and internal (i.e. 127.0.0.1) addresses
+    if (net.family === 'IPv4' && !net.internal) {
+      nameOfNetwrok = name;
+      if (!results[name]) {
+        results[name] = [];
+      }
+      results[name].push(net.address);
+    }
+  }
+}
+
+app.get('/ip', function (req, res) {
+  res.send({
+    ip: results[nameOfNetwrok]
+  });
 })

@@ -4,6 +4,7 @@
   "author": "Ahmed Gamal",
   "dependencies": {
     "express": "*",
+    "opn": "^6.0.0",
     "serialport": "^9.2.0"
   },
   "engines": {
