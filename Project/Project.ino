@@ -43,8 +43,7 @@ void setup() {
   printCounter(counter);
 
   // initialize Flags
-  PrintSerial();
-  SetFlags();
+  UpdateSerial();
 }
 
 void loop() {
@@ -55,8 +54,9 @@ void loop() {
     redFlagChar = Serial.read();
     blueFlagChar = Serial.read();
 
-    PrintSerial();
-    SetFlags();
+    UpdateSerial();
+    Serial.print(redFlagChar);
+    Serial.println(blueFlagChar);
 
     LedsUpdate();
   }
@@ -126,7 +126,7 @@ void LedsUpdate() {
   } else {
     LedsOff();
   }
-  
+
   if (!redAutoFlag) {
     if (redFlag) {
       digitalWrite(ledRed, HIGH);
@@ -134,7 +134,7 @@ void LedsUpdate() {
       digitalWrite(ledRed, LOW);
     }
   }
-  
+
   if (!blueAutoFlag) {
     if (blueFlag) {
       digitalWrite(ledBlue, HIGH);
@@ -145,63 +145,41 @@ void LedsUpdate() {
 
 }
 
-void SetFlags () {
+void UpdateSerial () {
+  lcd.setCursor(0, 1);
   switch (redFlagChar) {
-    default:
     case '0':
       redFlag = false;
       redAutoFlag = false;
+      lcd.print("R: OFF ");
       break;
     case '1':
       redFlag = true;
       redAutoFlag = false;
-      break;
-    case '2':
-      redAutoFlag = true;
-      break;
-  }
-
-  switch (blueFlagChar) {
-    default:
-    case '0':
-      blueFlag = false;
-      blueAutoFlag = false;
-      break;
-    case '1':
-      blueFlag = true;
-      blueAutoFlag = false;
-      break;
-    case '2':
-      blueAutoFlag = true;
-      break;
-  }
-}
-
-void PrintSerial() {
-  lcd.setCursor(0, 1);
-  switch (redFlagChar) {
-    default:
-    case '0':
-      lcd.print("R: OFF ");
-      break;
-    case '1':
       lcd.print("R: ON  ");
       break;
+    default:
     case '2':
+      redAutoFlag = true;
       lcd.print("R: AUTO");
       break;
   }
 
   lcd.setCursor(8, 1);
   switch (blueFlagChar) {
-    default:
     case '0':
+      blueFlag = false;
+      blueAutoFlag = false;
       lcd.print("B: OFF ");
       break;
     case '1':
+      blueFlag = true;
+      blueAutoFlag = false;
       lcd.print("B: ON  ");
       break;
+    default:
     case '2':
+      blueAutoFlag = true;
       lcd.print("B: AUTO");
       break;
   }

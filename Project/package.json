@@ -1,7 +1,7 @@
 {
-  "name": "serialserver",
-  "version": "0.0.5",
-  "author": "Tom Igoe",
+  "name": "arduino-project",
+  "version": "0.0.1",
+  "author": "Ahmed Gamal",
   "dependencies": {
     "express": "*",
     "serialport": "^9.2.0",
